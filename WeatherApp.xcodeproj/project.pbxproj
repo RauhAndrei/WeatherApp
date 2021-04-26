@@ -46,6 +46,7 @@
 			children = (
 				95C8E2DB26341FAB00C2C717 /* WeatherApp */,
 				95C8E2DA26341FAB00C2C717 /* Products */,
+				95C8E2F82636AECF00C2C717 /* light_background.pdf */,
 				95C8E2F72636AECF00C2C717 /* dark_background.pdf */,
 			);
 			sourceTree = "<group>";
@@ -92,7 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				95C8E2E226341FAB00C2C717 /* Main.storyboard */,
-				95C8E2F82636AECF00C2C717 /* light_background.pdf */,
 			);
 			path = View;
 			sourceTree = "<group>";

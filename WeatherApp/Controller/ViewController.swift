@@ -8,15 +8,43 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UITextFieldDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        cityTextField.delegate = self
+        
     }
-
+    
     @IBOutlet weak var selectedCityLabel: UILabel!
     @IBOutlet weak var celciusNumberLabel: UILabel!
     @IBOutlet weak var outsideConditionImage: UIImageView!
+    @IBOutlet weak var cityTextField: UITextField!
+    
+    
+    
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
+        cityTextField.endEditing(true)
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        cityTextField.endEditing(true)
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != ""{
+            return true
+        } else {
+            textField.placeholder = "Type something"
+            return false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        cityTextField.text = ""
+    }
+    
 }
 
