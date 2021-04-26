@@ -13,6 +13,8 @@
 		95C8E2E426341FAB00C2C717 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C8E2E226341FAB00C2C717 /* Main.storyboard */; };
 		95C8E2E626341FAE00C2C717 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95C8E2E526341FAE00C2C717 /* Assets.xcassets */; };
 		95C8E2E926341FAE00C2C717 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C8E2E726341FAE00C2C717 /* LaunchScreen.storyboard */; };
+		95C8E2F92636AECF00C2C717 /* dark_background.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 95C8E2F72636AECF00C2C717 /* dark_background.pdf */; };
+		95C8E2FA2636AECF00C2C717 /* light_background.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 95C8E2F82636AECF00C2C717 /* light_background.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		95C8E2E526341FAE00C2C717 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95C8E2E826341FAE00C2C717 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95C8E2EA26341FAE00C2C717 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95C8E2F72636AECF00C2C717 /* dark_background.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = dark_background.pdf; sourceTree = "<group>"; };
+		95C8E2F82636AECF00C2C717 /* light_background.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = light_background.pdf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +46,7 @@
 			children = (
 				95C8E2DB26341FAB00C2C717 /* WeatherApp */,
 				95C8E2DA26341FAB00C2C717 /* Products */,
+				95C8E2F72636AECF00C2C717 /* dark_background.pdf */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				95C8E2E226341FAB00C2C717 /* Main.storyboard */,
+				95C8E2F82636AECF00C2C717 /* light_background.pdf */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -149,6 +155,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95C8E2FA2636AECF00C2C717 /* light_background.pdf in Resources */,
+				95C8E2F92636AECF00C2C717 /* dark_background.pdf in Resources */,
 				95C8E2E926341FAE00C2C717 /* LaunchScreen.storyboard in Resources */,
 				95C8E2E626341FAE00C2C717 /* Assets.xcassets in Resources */,
 				95C8E2E426341FAB00C2C717 /* Main.storyboard in Resources */,
