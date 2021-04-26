@@ -15,6 +15,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBOutlet weak var selectedCityLabel: UILabel!
+    @IBOutlet weak var celciusNumberLabel: UILabel!
+    @IBOutlet weak var outsideConditionImage: UIImageView!
 }
 
