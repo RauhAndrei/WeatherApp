@@ -18,6 +18,7 @@ struct Main: Decodable {
     let temp: Double
 }
 
+//MARK: - id is conditionID from O.W.M.
 struct Weather: Decodable {
-    let description: String
+    let id: Int
 }
