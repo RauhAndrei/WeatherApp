@@ -9,11 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
-    
+    var weatherManager = WeatherManager()
     override func viewDidLoad() {
         super.viewDidLoad()
         cityTextField.delegate = self
-        
     }
     
     @IBOutlet weak var selectedCityLabel: UILabel!
@@ -43,6 +42,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        if let city = cityTextField.text {
+            //MARK: - After that user typed the city name, this will be send to fetchWeather for understanding in what city will need to grab data
+            weatherManager.fetchWeather(cityName: city)
+        }
+        
         cityTextField.text = ""
     }
     
