@@ -8,17 +8,17 @@
 
 import Foundation
 //MARK: - This file is implementation of data from OpenWeatherMap, it's for taking data from O.W.M.
-struct WeatherData: Decodable {
+struct WeatherData: Codable {
     let name: String
     let main: Main
     let weather: [Weather]
 }
 
-struct Main: Decodable {
+struct Main: Codable {
     let temp: Double
 }
 
 //MARK: - id is conditionID from O.W.M.
-struct Weather: Decodable {
+struct Weather: Codable {
     let id: Int
 }

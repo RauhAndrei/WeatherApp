@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
     var weatherManager = WeatherManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cityTextField.delegate = self
+        weatherManager.delegate = self
     }
     
     @IBOutlet weak var selectedCityLabel: UILabel!
@@ -43,11 +45,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let city = cityTextField.text {
-            //MARK: - After that user typed the city name, this will be send to fetchWeather for understanding in what city will need to grab data
+            //MARK: - After user typed a city, this will be send to fetchWeather for understanding from what city will need to grab data
             weatherManager.fetchWeather(cityName: city)
         }
         
         cityTextField.text = ""
+    }
+    
+    
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        DispatchQueue.main.async {
+            self.celciusNumberLabel.text = weather.temperatureString
+            self.outsideConditionImage.image = UIImage(systemName: weather.conditionName)
+            self.selectedCityLabel.text = weather.cityName
+        }
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
     }
     
 }
