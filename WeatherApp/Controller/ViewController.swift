@@ -7,20 +7,34 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
     var weatherManager = WeatherManager()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        cityTextField.delegate = self
-        weatherManager.delegate = self
-    }
+    let locationManager = CLLocationManager()
     
     @IBOutlet weak var selectedCityLabel: UILabel!
     @IBOutlet weak var celciusNumberLabel: UILabel!
     @IBOutlet weak var outsideConditionImage: UIImageView!
     @IBOutlet weak var cityTextField: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        cityTextField.delegate = self
+        weatherManager.delegate = self
+        locationManager.delegate = self
+        
+        //MARK: - Asking user to use their location (also in info.plist add a new property)
+        locationManager.requestWhenInUseAuthorization()
+        //MARK: - Request one time user location for using users current location
+        locationManager.requestLocation()
+    }
+    
+    @IBAction func currentLocationPressed(_ sender: UIButton) {
+        locationManager.requestLocation()
+    }
+    
 }
 
 //MARK: - UITextFieldDelegate
@@ -47,10 +61,9 @@ extension ViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let city = cityTextField.text {
-            //MARK: - After user typed a city, this will be send to fetchWeather for understanding from what city will need to grab data
+            //MARK: - After user typed a city, this will be send to fetchWeather for grab data from the city
             weatherManager.fetchWeather(cityName: city)
         }
-        
         cityTextField.text = ""
     }
 }
@@ -59,7 +72,7 @@ extension ViewController: UITextFieldDelegate {
 
 extension ViewController: WeatherManagerDelegate {
     
- func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+    func uploadWeatherToUI(_ weatherManager: WeatherManager, weather: WeatherModel) {
         //MARK: - This is used for run the task on the main thread.(This kind of tasks in background may cause problems)
         DispatchQueue.main.async {
             self.celciusNumberLabel.text = weather.temperatureString
@@ -69,6 +82,24 @@ extension ViewController: WeatherManagerDelegate {
     }
     
     func didFailWithError(error: Error) {
-        print(error)
+        print("WeatherManagerDelegate - didFailWithError --- \(error)")
+    }
+}
+
+//MARK: - CLLocationManagerDelegate
+extension ViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            //MARK: - This method stops the generation of location updates and use only first user location
+            locationManager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            weatherManager.fetchWeather(latitude: lat, longitude: lon)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location manager didFailWithError --- \(error)")
     }
 }

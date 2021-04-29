@@ -7,42 +7,48 @@
 //
 
 protocol WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
+    func uploadWeatherToUI(_ weatherManager: WeatherManager, weather: WeatherModel)
     func didFailWithError(error: Error)
 }
 
 import Foundation
+import CoreLocation
+
 struct WeatherManager {
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?&units=metric&appid=a7a00433fe426351d2479f04f93cd75f"
     
-    
     var delegate: WeatherManagerDelegate?
     
-    //MARK: - This function go to the url and send data to perfomRequest
+    //MARK: - Check the url and send data to perfomRequest
     func fetchWeather(cityName: String) {
         let urlsString = "\(weatherURL)&q=\(cityName)"
         performRequest(with: urlsString)
     }
     
-    //MARK: - This function create url, session, task, and grab data from the url after send it to decode to decodeJSON
+    //MARK: - Check the url and send latitude, longitude data to perfomRequest for determinate current location weather
+    func fetchWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        let urlsString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
+        performRequest(with: urlsString)
+    }
+    
+    //MARK: - Create url, session, task, and grab data from the url after send it to decode to decodeJSON
     func performRequest(with urlString: String) {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil {
-                    self.delegate?.didFailWithError(error: error as! Error)
+                    self.delegate?.didFailWithError(error: error!)
                     return
                 }
+                //MARK: - Decode safeData and upload this data to UI
                 if let safeData = data {
-                    //MARK: - IDK
                     if let weather = self.decodeJSON(safeData) {
-                        self.delegate?.didUpdateWeather(self, weather: weather)
-                        //MARK: - IDK
+                        self.delegate?.uploadWeatherToUI(self, weather: weather)
                     }
                 }
             }
+            //MARK: - Start the task
             task.resume()
-            
         }
     }
     
@@ -56,13 +62,15 @@ struct WeatherManager {
             let name = decodedData.name
             
             let weather = WeatherModel(conditionID: id, cityName: name, temperature: temp)
-//            print(weather.temperature)
+            
             return weather
+            
         } catch {
+            
             delegate?.didFailWithError(error: error)
         }
+        
         return nil
     }
-    
 }
 

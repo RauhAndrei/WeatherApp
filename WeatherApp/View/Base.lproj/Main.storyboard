@@ -42,6 +42,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" image="location.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="currentLocationPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="svM-PP-FBe"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cloud.sun.bolt" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ik5-a9-Cns">
                                 <rect key="frame" x="268" y="87" width="126" height="122"/>
@@ -89,7 +92,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1165.217391304348" y="-31.473214285714285"/>
+            <point key="canvasLocation" x="-1062" y="-104"/>
         </scene>
     </scenes>
     <resources>
