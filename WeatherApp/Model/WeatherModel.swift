@@ -7,7 +7,7 @@
 //
 
 import Foundation
-//MARK: - This struct is for changing of picture in display, based on conditionID form O.W.M
+///This struct is for changing of picture in display, based on conditionID form O.W.M
 struct WeatherModel {
     let conditionID: Int
     let cityName: String
@@ -15,7 +15,6 @@ struct WeatherModel {
     var temperatureString: String {
         return String(format: "%0.1f", temperature)
     }
-    
     
     var conditionName: String {
         switch conditionID {
@@ -37,7 +36,4 @@ struct WeatherModel {
             return "cloud"
         }
     }
-    
-    
-    
 }

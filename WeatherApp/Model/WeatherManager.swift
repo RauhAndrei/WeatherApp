@@ -19,19 +19,19 @@ struct WeatherManager {
     
     var delegate: WeatherManagerDelegate?
     
-    //MARK: - Check the url and send data to perfomRequest
+    ///Check the url and send data to perfomRequest
     func fetchWeather(cityName: String) {
         let urlsString = "\(weatherURL)&q=\(cityName)"
         performRequest(with: urlsString)
     }
     
-    //MARK: - Check the url and send latitude, longitude data to perfomRequest for determinate current location weather
+    ///Check the url and send latitude, longitude data to perfomRequest for determinate current location weather
     func fetchWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
         let urlsString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
         performRequest(with: urlsString)
     }
     
-    //MARK: - Create url, session, task, and grab data from the url after send it to decode to decodeJSON
+    ///Create url, session, task, and grab data from the url after send it to decode to decodeJSON
     func performRequest(with urlString: String) {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
@@ -40,19 +40,19 @@ struct WeatherManager {
                     self.delegate?.didFailWithError(error: error!)
                     return
                 }
-                //MARK: - Decode safeData and upload this data to UI
+                ///Decode safeData and upload this data to UI
                 if let safeData = data {
                     if let weather = self.decodeJSON(safeData) {
                         self.delegate?.uploadWeatherToUI(self, weather: weather)
                     }
                 }
             }
-            //MARK: - Start the task
+            ///Start the task
             task.resume()
         }
     }
     
-    //MARK: - This function decode data from OpenWeatherMap and print it with WeatherData
+    ///This function decode data from OpenWeatherMap and print it with WeatherData
     func decodeJSON(_ weatherData: Data) -> WeatherModel? {
         let decoder = JSONDecoder()
         do {
@@ -64,12 +64,9 @@ struct WeatherManager {
             let weather = WeatherModel(conditionID: id, cityName: name, temperature: temp)
             
             return weather
-            
         } catch {
-            
             delegate?.didFailWithError(error: error)
         }
-        
         return nil
     }
 }
