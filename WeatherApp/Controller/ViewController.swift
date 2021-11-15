@@ -75,7 +75,7 @@ extension ViewController: WeatherManagerDelegate {
     func uploadWeatherToUI(_ weatherManager: WeatherManager,
                            weather: WeatherModel) {
         DispatchQueue.main.async {
-            self.celciusNumberLabel.text = weather.temperatureString
+            self.celciusNumberLabel.text = "\(weather.temperatureString)°C"
             self.outsideConditionImage.image = UIImage(systemName: weather.conditionName)
             self.selectedCityLabel.text = weather.cityName
         }
