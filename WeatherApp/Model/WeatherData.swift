@@ -7,7 +7,6 @@
 //
 
 import Foundation
-///This file is implementation of data from OpenWeatherMap, it's for taking data from O.W.M.
 struct WeatherData: Codable {
     let name: String
     let main: Main
@@ -18,7 +17,6 @@ struct Main: Codable {
     let temp: Double
 }
 
-///id is conditionID from O.W.M.
 struct Weather: Codable {
     let id: Int
 }

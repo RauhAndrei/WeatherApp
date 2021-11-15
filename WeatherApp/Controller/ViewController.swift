@@ -27,10 +27,8 @@ class ViewController: UIViewController {
         weatherManager.delegate = self
         locationManager.delegate = self
         
-        locationManager.requestWhenInUseAuthorization()
-        ///Asking user to use their location (also in info.plist add a new property)
-        locationManager.requestLocation()
-        ///Request user location for using users current location
+        locationManager.requestWhenInUseAuthorization() ///Asking user to use their location
+        locationManager.requestLocation() ///Request user location for using users current location
     }
     
     //MARK: - IBActions
@@ -65,7 +63,6 @@ extension ViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let city = cityTextField.text {
             weatherManager.fetchWeather(cityName: city)
-            ///After user typed a city, this will be send to fetchWeather for grab data from the city
         }
         cityTextField.text = ""
     }
@@ -75,8 +72,8 @@ extension ViewController: UITextFieldDelegate {
 
 extension ViewController: WeatherManagerDelegate {
     
-    func uploadWeatherToUI(_ weatherManager: WeatherManager, weather: WeatherModel) {
-        ///This is used for run the task on the main thread.(This kind of tasks in background may cause problems)
+    func uploadWeatherToUI(_ weatherManager: WeatherManager,
+                           weather: WeatherModel) {
         DispatchQueue.main.async {
             self.celciusNumberLabel.text = weather.temperatureString
             self.outsideConditionImage.image = UIImage(systemName: weather.conditionName)
@@ -92,9 +89,10 @@ extension ViewController: WeatherManagerDelegate {
 //MARK: - CLLocationManagerDelegate
 extension ViewController: CLLocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager,
+                         didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            ///This method stops the generation of location updates and use only first user location
+            ///stops the generation of location updates and use user location
             locationManager.stopUpdatingLocation()
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
@@ -102,7 +100,8 @@ extension ViewController: CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    func locationManager(_ manager: CLLocationManager,
+                         didFailWithError error: Error) {
         print("Location manager didFailWithError --- \(error)")
     }
 }
